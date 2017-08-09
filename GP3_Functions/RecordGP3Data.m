@@ -1,14 +1,12 @@
-function RecordGP3Data(outputFileName)
+function RecordGP3Data(outputFileName, varargin)
 %Creates a client that reads GP3 data from its buffer and writes it to an
 %output text file
 %
-%Advanced Use: to control which specific data is included in the output
-%file, modify the code under the "configure data stream" section.
-%For example, if you would like to include POG gaze data, simply include: 
-%fprintf(session2_client, '<SET ID="ENABLE_SEND_POG_BEST" STATE="1" />');
-%Please refer to the Gazepoint API for a list of all data types 
-%that can be received by the client.
-dbstop if error
+%The first argument is the outputFileName
+%If there is only one input argument, the default is to configure the data
+%stream to send Left Pupil, Right Pupil, and Blink data.
+%User may also specify the specific data types that they want to receive.
+
 %% Set-up new file and socket
 fileID = fopen(outputFileName,'w');
 
@@ -20,10 +18,17 @@ session2_client.Terminator = 'CR/LF';
 
 %% Configure data stream
 fprintf(session2_client, '<SET ID="ENABLE_SEND_TIME" STATE="1" />');
-fprintf(session2_client, '<SET ID="ENABLE_SEND_PUPIL_LEFT" STATE="1" />');
-fprintf(session2_client, '<SET ID="ENABLE_SEND_PUPIL_RIGHT" STATE="1" />');
-fprintf(session2_client, '<SET ID="ENABLE_SEND_BLINK" STATE="1" />');
-fprintf(session2_client, '<SET ID="ENABLE_SEND_USER_DATA" STATE="1" />'); % do NOT delete this line
+fprintf(session2_client, '<SET ID="ENABLE_SEND_USER_DATA" STATE="1" />');
+
+if isempty(varargin) %default
+    fprintf(session2_client, '<SET ID="ENABLE_SEND_PUPIL_LEFT" STATE="1" />');
+    fprintf(session2_client, '<SET ID="ENABLE_SEND_PUPIL_RIGHT" STATE="1" />');
+    fprintf(session2_client, '<SET ID="ENABLE_SEND_BLINK" STATE="1" />');
+elseif ~isempty(varargin)
+    for i=1:length(varargin)
+        fprintf(session2_client, ['<SET ID="' varargin{i} '" STATE="1" />']);
+    end
+end
 
 % start data server sending data
 fprintf(session2_client, '<SET ID="ENABLE_SEND_DATA" STATE="1" />');

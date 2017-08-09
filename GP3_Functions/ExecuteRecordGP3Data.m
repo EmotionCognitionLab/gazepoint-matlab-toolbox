@@ -1,6 +1,9 @@
-function ExecuteRecordGP3Data(session1_client, outputFileName)
-%Starts a new Matlab session and runs RetrieveGP3Data function; Also pauses
+function ExecuteRecordGP3Data(session1_client, outputFileName, varargin)
+%Starts a new Matlab session and runs RecordGP3Data function; Also pauses
 %the main Matlab session to give the new session time to load up
+%
+%varargin are the user-defined GP3 data configuration options for session2
+%client
 
 SendMsgToGP3(session1_client,'');
 fprintf(session1_client, '<SET ID="ENABLE_SEND_USER_DATA" STATE="1" />');
@@ -10,10 +13,10 @@ SendMsgToGP3(session1_client,'START_RECORDING')
 if exist([pwd '/RecordGP3Data.m'],'file')
     % run this if the GP3 functions are in the same folder as the main
     % script
-    eval(['!matlab -nosplash -nodesktop -r "RecordGP3Data(''' outputFileName ''')" &'])
+    eval(['!matlab -nosplash -nodesktop -r "RecordGP3Data(''' outputFileName ',' varargin ''')" &'])
 else
     % run this if the GP3 functions are in a sub-folder of the main script
-    eval(['!matlab -nosplash -nodesktop -r "addpath(genpath(pwd)); RecordGP3Data(''' outputFileName ''')" &'])
+    eval(['!matlab -nosplash -nodesktop -r "addpath(genpath(pwd)); RecordGP3Data(''' outputFileName ',' varargin ''')" &'])
 end
 
 fprintf('\n Connecting with session 2 client. Please wait...\n\n')
