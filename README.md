@@ -35,3 +35,4 @@ SendMsgToGP3(session1_client,'STOP_EYETRACKER');
 ```
 CleanUpSocket(session1_client);
 ```
+6. You're now ready to run your experiment script with eye-tracking! Before running the Matlab script, remember to first start up the Gazepoint application.
