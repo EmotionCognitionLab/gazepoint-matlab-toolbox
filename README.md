@@ -40,5 +40,5 @@ CleanUpSocket(session1_client);
 ### Configuring the Eye-tracking Data Stream
 The ExecuteRecordGP3Data function gives you the option to configure the eye-tracker data stream to your specifications. To do this, pass each of the desired data type keywords as strings when you call ExecuteRecordGP3Data in your script. If no optional variables are passed, the default data stream configuration includes Left Pupil, Right Pupil, and Blink data (the values that I'm most interested in). The comprehensive list of data type keywords can be found in the Gazepoint API (http://www.gazept.com/dl/Gazepoint_API_v2.0.pdf). For instance, if I want the data for Right Pupil Data and Best POG:
 ```
-ExecuteRecordGP3Data(session1_client,outputFileName,'ENABLE_SEND_PUPIL_LEFT','ENABLE_SEND_POG_BEST');
+ExecuteRecordGP3Data(session1_client,outputFileName,'ENABLE_SEND_PUPIL_RIGHT','ENABLE_SEND_POG_BEST');
 ```
