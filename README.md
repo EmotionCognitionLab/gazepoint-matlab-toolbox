@@ -16,6 +16,7 @@ ExecuteRecordGP3Data(session1_client,outputFileName);
 ```
 3. In the stimuli presentation body of your main script, it's important to embed synchronization messages in your eye-tracking data stream. Mark any event of interest by including the SendMsgToGP3 function in your script. For example, you may want to send a message trigger at the start of a new trial, at the onset and/or offset of a stimuli, or after a participant button response.
 ```
+%% Experiment (stimuli presentation) goes here
 for trial_num=1:5
     % Start of new trial here
     SendMsgToGP3(session1_client,['trial_start' num2str(trial_num)]); %send msg trigger for start of the trial
@@ -25,4 +26,12 @@ for trial_num=1:5
     pause(2);  
 end
 ```
-4. 
+4. After the behavioral experiment completes, tell the session2 socket to stop collecting data.
+```
+%% Stop collecting data in session2 socket
+SendMsgToGP3(session1_client,'STOP_EYETRACKER');
+```
+5. Finally, close the session1 socket.
+```
+CleanUpSocket(session1_client);
+```
