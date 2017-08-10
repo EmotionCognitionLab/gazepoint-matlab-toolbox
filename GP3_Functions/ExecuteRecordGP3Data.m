@@ -13,10 +13,12 @@ SendMsgToGP3(session1_client,'START_RECORDING')
 if exist([pwd '/RecordGP3Data.m'],'file')
     % run this if the GP3 functions are in the same folder as the main
     % script
-    eval(['!matlab -nosplash -nodesktop -r "RecordGP3Data(''' outputFileName ',' varargin ''')" &'])
+    arguments = CreateInputArguments(varargin{:});
+    eval(['!matlab -nosplash -nodesktop -r "RecordGP3Data(''' outputFileName arguments ''')" &'])
 else
     % run this if the GP3 functions are in a sub-folder of the main script
-    eval(['!matlab -nosplash -nodesktop -r "addpath(genpath(pwd)); RecordGP3Data(''' outputFileName ',' varargin ''')" &'])
+    arguments = CreateInputArguments(varargin{:});
+    eval(['!matlab -nosplash -nodesktop -r "addpath(genpath(pwd)); RecordGP3Data(''' outputFileName arguments ''')" &'])
 end
 
 fprintf('\n Connecting with session 2 client. Please wait...\n\n')
@@ -43,3 +45,11 @@ end
 fprintf(session1_client, '<SET ID="ENABLE_SEND_DATA" STATE="0" />');
 
 commandwindow; %returns window control to session 1's command window
+
+%% Creates the arguments that is passed into the eval function
+function arguments = CreateInputArguments(varargin)
+    arguments = '';
+    for i=1:length(varargin)
+        arguments = [arguments ''',''' varargin{i} ];
+    end
+
