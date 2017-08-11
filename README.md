@@ -4,7 +4,7 @@ This toolbox allows Matlab users to interface with Gazepoint eyetrackers.
 The simplest way to implement this toolbox in your Matlab/Psychtoolbox experiments is to use Example_Script.m as a template. 
 
 ### Quickstart Guide
-1. Install the Gazepoint applications from this link (https://www.gazept.com/downloads/). Then, download the gazepoint-matlab-toolbox and save the Matlab functions in the GP3_Functions the directory or a sub-directory of your main experiment script.
+1. Install the Gazepoint applications from this link (https://www.gazept.com/downloads/). Then, download the gazepoint-matlab-toolbox and save the functions found in GP3_Functions in the directory or a sub-directory of your main experiment script.
 2. At the beginning of your main experiment script, include the following lines of code to set up connections with the GP3 eye-tracker. The ConnectToGP3 function creates a socket connection with the GP3 server in the main Matlab session (session1). This session1 socket is used to send synchronization triggers from the experiment script to the eye-tracking data stream. The ExecuteRecordGP3Data function spawns a new Matlab session (session2) and creates another socket. The session2 TCPIP socket reads the eye-tracking data from its input buffer and stores the data in a text file.
 ```
 %% Set-up Matlab to GP3 session1 socket
