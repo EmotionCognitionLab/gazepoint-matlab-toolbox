@@ -3,8 +3,8 @@ function StartCalibration(session1_client, varargin)
 %duration
 %
 %Author: Ringo Huang (ringohua@usc.edu)
-%Created: 8/8/2017
-%Last Update: 8/20/2017
+%Created: 9/2/2017
+%Last Update: 9/2/2017
 
 
 narginchk(1,2);
