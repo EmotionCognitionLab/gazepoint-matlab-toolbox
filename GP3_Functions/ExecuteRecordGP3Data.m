@@ -4,6 +4,10 @@ function ExecuteRecordGP3Data(session1_client, outputFileName, varargin)
 %
 %varargin are the user-defined GP3 data configuration options for session2
 %client
+%
+%%Author: Ringo Huang (ringohua@usc.edu)
+%Created: 8/8/2017
+%Last Update: 8/20/2017
 
 SendMsgToGP3(session1_client,'');
 fprintf(session1_client, '<SET ID="ENABLE_SEND_USER_DATA" STATE="1" />');

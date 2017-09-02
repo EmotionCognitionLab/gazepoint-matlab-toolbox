@@ -6,6 +6,10 @@ function RecordGP3Data(outputFileName, varargin)
 %If there is only one input argument, the default is to configure the data
 %stream to send Left Pupil, Right Pupil, and Blink data.
 %User may also specify the specific data types that they want to receive.
+%
+%Author: Ringo Huang (ringohua@usc.edu)
+%Created: 8/8/2017
+%Last Update: 8/20/2017
 
 %% Set-up new file and socket
 fileID = fopen(outputFileName,'w');
