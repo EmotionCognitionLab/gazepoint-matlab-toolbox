@@ -25,7 +25,7 @@ else
     eval(['!matlab -nosplash -nodesktop -r "addpath(genpath(pwd)); RecordGP3Data(''' outputFileName arguments ''')" &'])
 end
 
-fprintf('\n Connecting with session 2 client. Please wait...\n\n')
+fprintf('\nConnecting with session 2 client. Please wait...\n\n')
 pause(.05)
 
 %% Wait until session2 client is ready
@@ -39,7 +39,7 @@ while  1
         fprintf('\nConnection Successful! Starting Experiment...\n\n')
         break
     end
-    if toc(time_start) > 60
+    if toc(time_start) > 120
         error('Connection time out: could not connect to session 2 client;')
     end
      pause(.01);

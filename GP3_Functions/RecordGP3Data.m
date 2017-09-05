@@ -22,6 +22,7 @@ session2_client.Terminator = 'CR/LF';
 
 %% Configure data stream
 fprintf(session2_client, '<SET ID="ENABLE_SEND_TIME" STATE="1" />');
+fprintf(session2_client, '<SET ID="ENABLE_SEND_COUNTER" STATE="1" />');
 fprintf(session2_client, '<SET ID="ENABLE_SEND_USER_DATA" STATE="1" />');
 
 if isempty(varargin) %default
@@ -71,6 +72,7 @@ end
 fprintf(fileID,['DATATYPE\t' repmat('%s\t',1,length(header)) '\n'],header{:});
 
 %% Read and parse data from the buffer
+msg_count = 0;
 while  session2_client.BytesAvailable > 0
         %% Scan data from buffer and parse the xml format
         dataReceived = fscanf(session2_client);
@@ -87,11 +89,13 @@ while  session2_client.BytesAvailable > 0
             %% Embeds message trigger in the data
             if ~strcmp(current_user_data,previous_user_data)
                 % if the user_data tag differs from the previous sample, write
-                % the user_data to the output data file as a trigger
+                % the user_data to the output data file as a trigger;
+                % value{2} is Timestamp
+                msg_count = msg_count + 1;
                 previous_user_data = split{end-1};
                 fprintf([split{end-1} '\n'])
-                msg_time = str2double(value{1}) - .008;      %NOTE: the precise instance when the msg was sent is inaccurate within +/-8ms
-                fprintf(fileID,'MSG\t%s\t%s\n',num2str(msg_time),previous_user_data);
+                msg_time = str2double(value{2}) - .008;      %NOTE: the precise instance when the msg was sent is inaccurate within +/-8ms
+                fprintf(fileID,'MSG\t%s\t%s\t%s\n',num2str(msg_count),num2str(msg_time),previous_user_data);
             end
             
             %% Stops reading data from the buffer
