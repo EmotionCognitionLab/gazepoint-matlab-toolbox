@@ -28,6 +28,8 @@ fprintf(session2_client, '<SET ID="ENABLE_SEND_USER_DATA" STATE="1" />');
 if isempty(varargin) %default
     fprintf(session2_client, '<SET ID="ENABLE_SEND_PUPIL_LEFT" STATE="1" />');
     fprintf(session2_client, '<SET ID="ENABLE_SEND_PUPIL_RIGHT" STATE="1" />');
+    fprintf(session2_client, '<SET ID="ENABLE_SEND_EYE_LEFT" STATE="1" />');
+    fprintf(session2_client, '<SET ID="ENABLE_SEND_EYE_RIGHT" STATE="1" />');
     fprintf(session2_client, '<SET ID="ENABLE_SEND_BLINK" STATE="1" />');
 elseif ~isempty(varargin)
     for i=1:length(varargin)
