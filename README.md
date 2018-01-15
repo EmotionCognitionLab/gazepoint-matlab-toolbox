@@ -44,4 +44,4 @@ ExecuteRecordGP3Data(session1_client,outputFileName,'ENABLE_SEND_PUPIL_RIGHT','E
 ```
 
 ### Diagram of TCP/IP Scheme
-![alt text](https://raw.githubusercontent.com/RingoHHuang/gazepoint-matlab-toolbox/blob/master/GP3_Matlab_TCPIP_Diagram.png)
+![alt text](https://github.com/RingoHHuang/gazepoint-matlab-toolbox/blob/master/GP3_Matlab_TCPIP_Diagram.png)
