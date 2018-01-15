@@ -42,3 +42,6 @@ The ExecuteRecordGP3Data function gives you the option to configure the eye-trac
 ```
 ExecuteRecordGP3Data(session1_client,outputFileName,'ENABLE_SEND_PUPIL_RIGHT','ENABLE_SEND_POG_BEST');
 ```
+
+### Diagram of TCP/IP Scheme
+![alt text](https://raw.githubusercontent.com/RingoHHuang/gazepoint-matlab-toolbox/blob/master/GP3_Matlab_TCPIP_Diagram.png)
