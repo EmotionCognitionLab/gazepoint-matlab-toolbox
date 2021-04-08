@@ -81,7 +81,7 @@ while  session2_client.BytesAvailable > 0
         split = strsplit(dataReceived,'"');
         current_user_data = split{end-1};
         
-        if regexp(split{1},'<REC','once')                    
+        if regexp(split{1},'<REC','once')        
             %% Extracts the values from the xml file
             value = {};
             for j=2:2:length(split)

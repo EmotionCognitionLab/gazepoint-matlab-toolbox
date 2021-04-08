@@ -5,9 +5,20 @@ addpath(genpath(mainDir));
 %% Set-up Matlab to GP3 session1 socket
 session1_client = ConnectToGP3;
 
+%% Calibration
+StartCalibration(session1_client);
+fprintf(session1_client, '<GET ID="CALIBRATE_RESULT_SUMMARY" />');
+while  session1_client.BytesAvailable > 0
+ dataReceived = fscanf(session1_client);
+ disp(dataReceived)
+end
+
+
 %% Spawn a second Matlab session2 that records GP3 data to output file
 outputFileName = 'example_output.txt';
 ExecuteRecordGP3Data(session1_client,outputFileName);
+
+
 
 %% Experiment (stimuli presentation) goes here
 for trial_num=1:5
